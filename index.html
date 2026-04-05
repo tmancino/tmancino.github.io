@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Mancino</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 80px 24px;
+        }
+
+        .container {
+            max-width: 640px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #8b949e;
+            margin-bottom: 48px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+            margin-top: 48px;
+        }
+
+        .project {
+            display: block;
+            padding: 16px 0;
+            border-bottom: 1px solid #21262d;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+
+        .project:hover { opacity: 0.8; }
+        .project:last-child { border-bottom: none; }
+
+        .project-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #58a6ff;
+            margin-bottom: 4px;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #8b949e;
+            line-height: 1.4;
+        }
+
+        .project-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: #c9d1d9;
+            background: #21262d;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 6px;
+            margin-right: 4px;
+        }
+
+        .links {
+            margin-top: 48px;
+            display: flex;
+            gap: 24px;
+        }
+
+        .links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.15s;
+        }
+
+        .links a:hover { color: #f0f6fc; }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 48px 0 0 0;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: #484f58;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tom Mancino</h1>
+        <p class="subtitle">
+            Major General, U.S. Army. AI developer. Building at the intersection of defense, machine learning, and national security.
+        </p>
+
+        <h2>Recent Work</h2>
+
+        <a href="https://github.com/openai/parameter-golf/pull/1239" class="project" target="_blank">
+            <div class="project-title">Non-Euclidean Lorentzian Attention on the Hyperboloid Manifold</div>
+            <div class="project-desc">
+                Submission to OpenAI's Parameter Golf challenge — training the best language model that fits in 16MB. Uses Lorentzian attention computed in hyperbolic space to capture hierarchical language structure more naturally than flat Euclidean dot-product attention.
+            </div>
+            <span class="project-tag">ML Research</span>
+            <span class="project-tag">OpenAI Challenge</span>
+        </a>
+
+        <a href="https://tmancino.github.io/dormant-dashboard/" class="project" target="_blank">
+            <div class="project-title">Dormant LLM Puzzle — MoE Expert Activation Cascade Visualizer</div>
+            <div class="project-desc">
+                Interactive visualization tool for Jane Street's mechanistic interpretability challenge. Maps backdoor trigger propagation across 59 mixture-of-experts layers in DeepSeek V3 671B models, revealing hidden activation cascades in the routing architecture.
+            </div>
+            <span class="project-tag">Mechanistic Interpretability</span>
+            <span class="project-tag">Jane Street</span>
+        </a>
+
+        <a href="https://github.com/gettweek/tweek" class="project" target="_blank">
+            <div class="project-title">Tweek — Security Screening for AI Coding Assistants</div>
+            <div class="project-desc">
+                Open-source tool for detecting prompt injection and security risks in AI coding assistant skill files. Scans Claude Code, Cursor, and other AI IDE extensions for malicious patterns before they execute.
+            </div>
+            <span class="project-tag">AI Security</span>
+            <span class="project-tag">Open Source</span>
+        </a>
+
+        <div class="links">
+            <a href="https://github.com/tmancino">GitHub</a>
+            <a href="https://linkedin.com/in/tommancino">LinkedIn</a>
+        </div>
+
+        <hr class="divider">
+        <p class="footer">Oklahoma &middot; AI &middot; Defense &middot; National Security</p>
+    </div>
+</body>
+</html>
