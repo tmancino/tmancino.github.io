@@ -46,16 +46,30 @@
             margin-top: 48px;
         }
 
+        .group {
+            border-left: 2px solid #21262d;
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        .group-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #484f58;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+            padding-top: 12px;
+        }
+
         .project {
             display: block;
-            padding: 16px 0;
-            border-bottom: 1px solid #21262d;
+            padding: 12px 0;
             text-decoration: none;
             transition: opacity 0.15s;
         }
 
         .project:hover { opacity: 0.8; }
-        .project:last-child { border-bottom: none; }
 
         .project-title {
             font-size: 1rem;
@@ -79,6 +93,12 @@
             border-radius: 12px;
             margin-top: 6px;
             margin-right: 4px;
+        }
+
+        .group-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 16px 0 0 0;
         }
 
         .links {
@@ -118,52 +138,67 @@
 
         <h2>Recent Work</h2>
 
-        <a href="https://github.com/openai/parameter-golf/pull/1400" class="project" target="_blank">
-            <div class="project-title">Record: Hadamard-Rotated GPTQ + dTTT + Depth Recurrence (1.1035 BPB)</div>
-            <div class="project-desc">
-                New state-of-the-art submission to OpenAI's Parameter Golf challenge — best language model under 16MB. Combines Hadamard rotation before quantization (68x MSE reduction), discriminative test-time training with per-block adaptive learning rates, and 2-layer depth recurrence generating 13 effective transformer layers from 11 stored. Surpasses previous record by 0.0112 BPB (p &lt;&lt; 0.001).
-            </div>
-            <span class="project-tag">ML Research</span>
-            <span class="project-tag">OpenAI Challenge</span>
-            <span class="project-tag">Record</span>
-        </a>
+        <!-- OpenAI Parameter Golf -->
+        <div class="group">
+            <div class="group-label">OpenAI Parameter Golf Challenge</div>
 
-        <a href="https://github.com/openai/parameter-golf/pull/1239" class="project" target="_blank">
-            <div class="project-title">Non-Euclidean Lorentzian Attention on the Hyperboloid Manifold</div>
-            <div class="project-desc">
-                Earlier submission exploring non-Euclidean attention computed in hyperbolic space to capture hierarchical language structure more naturally than flat Euclidean dot-product attention.
-            </div>
-            <span class="project-tag">ML Research</span>
-            <span class="project-tag">OpenAI Challenge</span>
-        </a>
+            <a href="https://github.com/openai/parameter-golf/pull/1400" class="project" target="_blank">
+                <div class="project-title">Record: Hadamard-Rotated GPTQ + dTTT + Depth Recurrence (1.1035 BPB)</div>
+                <div class="project-desc">
+                    New state-of-the-art — best language model under 16MB. Combines Hadamard rotation before quantization (68x MSE reduction), discriminative test-time training with per-block adaptive learning rates, and 2-layer depth recurrence generating 13 effective transformer layers from 11 stored. Surpasses previous record by 0.0112 BPB (p &lt;&lt; 0.001).
+                </div>
+                <span class="project-tag">Record</span>
+                <span class="project-tag">ML Research</span>
+            </a>
 
-        <a href="https://tmancino.github.io/dormant-dashboard/Jane_Street_Dormant_Puzzle_Submission_Mancino.pdf" class="project" target="_blank">
-            <div class="project-title">Backdoor Trigger Discovery in DeepSeek V3 671B — Jane Street Dormant Puzzle</div>
-            <div class="project-desc">
-                Discovered 36 backdoor triggers across three poisoned 671B Mixture-of-Experts models using a semi-automated pipeline: router weight inversion, blind dormancy scanning, differential behavioral probing, and activation cascade mapping. Triggers hijack model output to force foreign-language responses, denial-of-service loops, and content steering at 76-100% success rates vs 0-2% baseline.
-            </div>
-            <span class="project-tag">Mechanistic Interpretability</span>
-            <span class="project-tag">AI Security</span>
-            <span class="project-tag">Jane Street</span>
-        </a>
+            <a href="https://github.com/openai/parameter-golf/pull/1239" class="project" target="_blank">
+                <div class="project-title">Non-Euclidean Lorentzian Attention on the Hyperboloid Manifold</div>
+                <div class="project-desc">
+                    Earlier submission exploring non-Euclidean attention computed in hyperbolic space to capture hierarchical language structure more naturally than flat Euclidean dot-product attention.
+                </div>
+                <span class="project-tag">ML Research</span>
+            </a>
+        </div>
 
-        <a href="https://tmancino.github.io/dormant-dashboard/" class="project" target="_blank">
-            <div class="project-title">MoE Expert Activation Cascade Visualizer</div>
-            <div class="project-desc">
-                Interactive tool mapping expert activation cascades across 59 MoE layers. Force-directed graph visualization of how dormant backdoor triggers propagate through the routing architecture. Filter by model, pathway type, and trigger.
-            </div>
-            <span class="project-tag">Interactive Demo</span>
-            <span class="project-tag">Data Visualization</span>
-        </a>
+        <hr class="group-divider">
 
-        <a href="https://github.com/gettweek/tweek" class="project" target="_blank">
-            <div class="project-title">Tweek — Security Screening for AI Coding Assistants</div>
-            <div class="project-desc">
-                Open-source tool for detecting prompt injection and security risks in AI coding assistant skill files. Scans Claude Code, Cursor, and other AI IDE extensions for malicious patterns before they execute.
-            </div>
-            <span class="project-tag">AI Security</span>
-            <span class="project-tag">Open Source</span>
-        </a>
+        <!-- Jane Street Dormant Puzzle -->
+        <div class="group">
+            <div class="group-label">Jane Street Dormant LLM Puzzle</div>
+
+            <a href="https://tmancino.github.io/dormant-dashboard/Jane_Street_Dormant_Puzzle_Submission_Mancino.pdf" class="project" target="_blank">
+                <div class="project-title">Backdoor Trigger Discovery in DeepSeek V3 671B</div>
+                <div class="project-desc">
+                    Discovered 36 backdoor triggers across three poisoned 671B Mixture-of-Experts models using a semi-automated pipeline: router weight inversion, blind dormancy scanning, differential behavioral probing, and activation cascade mapping. Triggers hijack model output at 76-100% success rates vs 0-2% baseline.
+                </div>
+                <span class="project-tag">Mechanistic Interpretability</span>
+                <span class="project-tag">AI Security</span>
+            </a>
+
+            <a href="https://tmancino.github.io/dormant-dashboard/" class="project" target="_blank">
+                <div class="project-title">MoE Expert Activation Cascade Visualizer</div>
+                <div class="project-desc">
+                    Interactive tool mapping expert activation cascades across 59 MoE layers. Force-directed graph visualization of how dormant backdoor triggers propagate through the routing architecture.
+                </div>
+                <span class="project-tag">Interactive Demo</span>
+            </a>
+        </div>
+
+        <hr class="group-divider">
+
+        <!-- Tweek -->
+        <div class="group">
+            <div class="group-label">Open Source</div>
+
+            <a href="https://github.com/gettweek/tweek" class="project" target="_blank">
+                <div class="project-title">Tweek — Security Screening for AI Coding Assistants</div>
+                <div class="project-desc">
+                    Open-source tool for detecting prompt injection and security risks in AI coding assistant skill files. Scans Claude Code, Cursor, and other AI IDE extensions for malicious patterns before they execute.
+                </div>
+                <span class="project-tag">AI Security</span>
+                <span class="project-tag">Open Source</span>
+            </a>
+        </div>
 
         <div class="links">
             <a href="https://github.com/tmancino">GitHub</a>
