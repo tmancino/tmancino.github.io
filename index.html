@@ -4,210 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tommy Mancino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0a0a0c;
+            --surface: #111114;
+            --border: #1e1e24;
+            --border-accent: #2a2a34;
+            --text: #b8b8c4;
+            --text-dim: #5c5c6e;
+            --text-bright: #e4e4ec;
+            --accent: #c8a46e;
+            --accent-dim: #8a7248;
+            --link: #7ea8d4;
+            --link-hover: #a8c8e8;
+            --tag-bg: #18181e;
+            --tag-border: #28283a;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: #0d1117;
-            color: #c9d1d9;
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 80px 24px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 640px;
-            width: 100%;
+        /* Subtle noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #f0f6fc;
-            margin-bottom: 8px;
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 32px 80px;
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #8b949e;
-            margin-bottom: 48px;
-            line-height: 1.5;
+        /* Header */
+        .header {
+            margin-bottom: 80px;
+            position: relative;
         }
 
-        h2 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #8b949e;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 48px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .name {
+            font-family: 'DM Serif Text', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--text-bright);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
             margin-bottom: 16px;
-            margin-top: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
         }
 
-        .group {
-            border-left: 2px solid #21262d;
-            padding-left: 16px;
-            margin-bottom: 8px;
+        .tagline {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            letter-spacing: 0.04em;
+            line-height: 1.7;
+            max-width: 480px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.15s forwards;
         }
 
-        .group-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #484f58;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 4px;
-            padding-top: 12px;
+        /* Section */
+        .section {
+            margin-bottom: 56px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
         }
 
-        .project {
-            display: block;
-            padding: 12px 0;
-            text-decoration: none;
-            transition: opacity 0.15s;
-        }
+        .section:nth-child(2) { animation-delay: 0.3s; }
+        .section:nth-child(3) { animation-delay: 0.45s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
 
-        .project:hover { opacity: 0.8; }
-
-        .project-title {
-            font-size: 1rem;
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
             font-weight: 500;
-            color: #58a6ff;
-            margin-bottom: 4px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .project-desc {
-            font-size: 0.9rem;
-            color: #8b949e;
-            line-height: 1.4;
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
         }
 
-        .project-tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            color: #c9d1d9;
-            background: #21262d;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-top: 6px;
-            margin-right: 4px;
+        /* Project cards */
+        .card {
+            display: block;
+            text-decoration: none;
+            padding: 20px 24px;
+            margin-bottom: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
-        .group-divider {
-            border: none;
-            border-top: 1px solid #21262d;
-            margin: 16px 0 0 0;
+        .card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
         }
 
-        .links {
-            margin-top: 48px;
+        .card:hover .card-title { color: var(--link-hover); }
+
+        .card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .card-title {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--link);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+            padding-right: 24px;
+        }
+
+        .card-arrow {
+            position: absolute;
+            top: 22px;
+            right: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            margin-top: 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            background: var(--tag-bg);
+            border: 1px solid var(--tag-border);
+            padding: 3px 10px;
+            border-radius: 2px;
+            letter-spacing: 0.02em;
+        }
+
+        /* Footer */
+        .foot {
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.75s forwards;
+        }
+
+        .foot-links {
             display: flex;
             gap: 24px;
         }
 
-        .links a {
-            color: #8b949e;
+        .foot-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-dim);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.15s;
+            letter-spacing: 0.04em;
+            transition: color 0.2s ease;
+            position: relative;
         }
 
-        .links a:hover { color: #f0f6fc; }
-
-        .divider {
-            border: none;
-            border-top: 1px solid #21262d;
-            margin: 48px 0 0 0;
+        .foot-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-dim);
+            transition: width 0.3s ease;
         }
 
-        .footer {
-            margin-top: 24px;
-            font-size: 0.8rem;
-            color: #484f58;
+        .foot-links a:hover { color: var(--text); }
+        .foot-links a:hover::after { width: 100%; }
+
+        .foot-location {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.06em;
+            opacity: 0.5;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 60px 20px 60px; }
+            .name { font-size: 2.1rem; }
+            .foot { flex-direction: column; gap: 16px; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tommy Mancino</h1>
-        <p class="subtitle">
-            AI developer. Building at the intersection of defense, machine learning, and national security.
-        </p>
-
-        <h2>Recent Work</h2>
+    <div class="page">
+        <header class="header">
+            <h1 class="name">Tommy Mancino</h1>
+            <p class="tagline">AI development &middot; defense technology &middot; machine learning research &middot; national security</p>
+        </header>
 
         <!-- OpenAI Parameter Golf -->
-        <div class="group">
-            <div class="group-label">OpenAI Parameter Golf Challenge</div>
+        <div class="section">
+            <div class="section-label">OpenAI Parameter Golf</div>
 
-            <a href="https://github.com/openai/parameter-golf/pull/1400" class="project" target="_blank">
-                <div class="project-title">Record: Hadamard-Rotated GPTQ + dTTT + Depth Recurrence (1.1035 BPB)</div>
-                <div class="project-desc">
-                    New state-of-the-art — best language model under 16MB. Combines Hadamard rotation before quantization (68x MSE reduction), discriminative test-time training with per-block adaptive learning rates, and 2-layer depth recurrence generating 13 effective transformer layers from 11 stored. Surpasses previous record by 0.0112 BPB (p &lt;&lt; 0.001).
+            <a href="https://github.com/openai/parameter-golf/pull/1239" class="card" target="_blank">
+                <span class="card-arrow">&nearr;</span>
+                <div class="card-title">Non-Euclidean Lorentzian Attention on the Hyperboloid Manifold</div>
+                <div class="card-desc">
+                    Submission to OpenAI's 16MB language model challenge. Lorentzian attention computed in hyperbolic space captures hierarchical language structure more naturally than flat Euclidean dot-product attention.
                 </div>
-                <span class="project-tag">Record</span>
-                <span class="project-tag">ML Research</span>
-            </a>
-
-            <a href="https://github.com/openai/parameter-golf/pull/1239" class="project" target="_blank">
-                <div class="project-title">Non-Euclidean Lorentzian Attention on the Hyperboloid Manifold</div>
-                <div class="project-desc">
-                    Earlier submission exploring non-Euclidean attention computed in hyperbolic space to capture hierarchical language structure more naturally than flat Euclidean dot-product attention.
+                <div class="card-meta">
+                    <span class="tag">ML Research</span>
+                    <span class="tag">Hyperbolic Geometry</span>
                 </div>
-                <span class="project-tag">ML Research</span>
             </a>
         </div>
-
-        <hr class="group-divider">
 
         <!-- Jane Street Dormant Puzzle -->
-        <div class="group">
-            <div class="group-label">Jane Street Dormant LLM Puzzle</div>
+        <div class="section">
+            <div class="section-label">Jane Street Dormant LLM Puzzle</div>
 
-            <a href="https://tmancino.github.io/dormant-dashboard/Jane_Street_Dormant_Puzzle_Submission_Mancino.pdf" class="project" target="_blank">
-                <div class="project-title">Backdoor Trigger Discovery in DeepSeek V3 671B</div>
-                <div class="project-desc">
-                    Discovered 36 backdoor triggers across three poisoned 671B Mixture-of-Experts models using a semi-automated pipeline: router weight inversion, blind dormancy scanning, differential behavioral probing, and activation cascade mapping. Triggers hijack model output at 76-100% success rates vs 0-2% baseline.
+            <a href="https://tmancino.github.io/dormant-dashboard/Jane_Street_Dormant_Puzzle_Submission_Mancino.pdf" class="card" target="_blank">
+                <span class="card-arrow">&nearr;</span>
+                <div class="card-title">Backdoor Trigger Discovery in DeepSeek V3 671B</div>
+                <div class="card-desc">
+                    Discovered 36 backdoor triggers across three poisoned 671B Mixture-of-Experts models. Semi-automated pipeline: router weight inversion, blind dormancy scanning, differential behavioral probing, and activation cascade mapping. 76-100% trigger success vs 0-2% baseline.
                 </div>
-                <span class="project-tag">Mechanistic Interpretability</span>
-                <span class="project-tag">AI Security</span>
+                <div class="card-meta">
+                    <span class="tag">Mechanistic Interpretability</span>
+                    <span class="tag">AI Security</span>
+                </div>
             </a>
 
-            <a href="https://tmancino.github.io/dormant-dashboard/" class="project" target="_blank">
-                <div class="project-title">MoE Expert Activation Cascade Visualizer</div>
-                <div class="project-desc">
-                    Interactive tool mapping expert activation cascades across 59 MoE layers. Force-directed graph visualization of how dormant backdoor triggers propagate through the routing architecture.
+            <a href="https://tmancino.github.io/dormant-dashboard/" class="card" target="_blank">
+                <span class="card-arrow">&nearr;</span>
+                <div class="card-title">MoE Expert Activation Cascade Visualizer</div>
+                <div class="card-desc">
+                    Interactive force-directed graph mapping expert activation cascades across 59 MoE layers. Visualizes how dormant backdoor triggers propagate through routing architecture.
                 </div>
-                <span class="project-tag">Interactive Demo</span>
-            </a>
-        </div>
-
-        <hr class="group-divider">
-
-        <!-- Tweek -->
-        <div class="group">
-            <div class="group-label">LLM Security</div>
-
-            <a href="https://gettweek.com" class="project" target="_blank">
-                <div class="project-title">Tweek — Defense-in-Depth Security for AI Assistants</div>
-                <div class="project-desc">
-                    Six-layer security for AI coding assistants — 249 attack signatures, local prompt injection classifier, sandbox preview, and response screening. Runs 100% locally between the AI and your system. Supports Claude Code, Cursor, ChatGPT, Gemini CLI. Apache 2.0 licensed.
+                <div class="card-meta">
+                    <span class="tag">Interactive</span>
+                    <span class="tag">Data Visualization</span>
                 </div>
-                <span class="project-tag">AI Security</span>
-                <span class="project-tag">Open Source</span>
-                <span class="project-tag">gettweek.com</span>
             </a>
         </div>
 
-        <div class="links">
-            <a href="https://github.com/tmancino">GitHub</a>
-            <a href="https://linkedin.com/in/tommancino">LinkedIn</a>
+        <!-- LLM Security -->
+        <div class="section">
+            <div class="section-label">LLM Security</div>
+
+            <a href="https://gettweek.com" class="card" target="_blank">
+                <span class="card-arrow">&nearr;</span>
+                <div class="card-title">Tweek &mdash; Defense-in-Depth Security for AI Assistants</div>
+                <div class="card-desc">
+                    Six-layer security for AI coding assistants. 249 attack signatures, local prompt injection classifier, sandbox preview, response screening. 100% local, no cloud. Supports Claude Code, Cursor, ChatGPT, Gemini CLI.
+                </div>
+                <div class="card-meta">
+                    <span class="tag">Open Source</span>
+                    <span class="tag">Apache 2.0</span>
+                    <span class="tag">gettweek.com</span>
+                </div>
+            </a>
         </div>
 
-        <hr class="divider">
-        <p class="footer">Oklahoma &middot; AI &middot; Defense &middot; National Security</p>
+        <footer class="foot">
+            <div class="foot-links">
+                <a href="https://github.com/tmancino">GitHub</a>
+                <a href="https://linkedin.com/in/tommymancino">LinkedIn</a>
+            </div>
+            <span class="foot-location">Oklahoma</span>
+        </footer>
     </div>
 </body>
 </html>
